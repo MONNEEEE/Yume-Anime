@@ -744,12 +744,30 @@ h1 {
   }
 
   const animeList = Array.isArray(window.animeData)
-    ? window.animeData
-    : [];
+  ? window.animeData
+  : [];
 
-  const anime = animeList.find(function (item) {
-    return String(item.id) === String(animeId);
-  });
+const anime = animeList.find(function (item) {
+  return String(item.id ?? "").trim() ===
+    String(animeId ?? "").trim();
+});
+
+if (anime) {
+  renderDetail(anime);
+} else {
+  content.innerHTML = `
+    <section class="not-found">
+      <div class="emoji">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
+      <h1>ยังหาอนิเมะไม่เจอ 🌸</h1>
+      <p>รหัสที่ได้รับ: ${escapeHTML(animeId || "ไม่มี ID")}</p>
+      <p>จำนวนข้อมูลที่โหลดได้: ${animeList.length} เรื่อง</p>
+      <p>ตรวจสอบไฟล์ data.js และรหัสอนิเมะอีกครั้งนะ</p>
+      <a class="primary-btn" href="catalog.html">
+        กลับไปคลังอนิเมะ
+      </a>
+    </section>
+  `;
+}
 
   if (anime) {
     renderDetail(anime);
