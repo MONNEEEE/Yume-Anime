@@ -938,73 +938,25 @@ button {
   }
 
   function updateCatalog() {
-    const animeList = getFilteredAnime();
+    ```javascript
+  const animeList = Array.isArray(window.animeData)
+    ? window.animeData
+    : [];
 
-    grid.innerHTML = animeList.map(renderAnime).join("");
-    resultCount.textContent = "พบ " + animeList.length + " เรื่อง";
+  const anime = animeList.find(function (item) {
+    return String(item.id ?? "").trim() ===
+      String(animeId ?? "").trim();
+  });
 
-    const hasResults = animeList.length > 0;
+  console.log("ID จาก URL:", animeId);
+  console.log("จำนวนอนิเมะ:", animeList.length);
+  console.log("อนิเมะที่พบ:", anime);
 
-    grid.style.display = hasResults ? "grid" : "none";
-    emptyState.style.display = hasResults ? "none" : "block";
+  if (anime) {
+    renderDetail(anime);
+  } else {
+    showNotFound();
   }
-
-  function resetFilters() {
-    searchInput.value = "";
-    genreFilter.value = "";
-    yearFilter.value = "";
-    statusFilter.value = "";
-    languageFilter.value = "";
-    sortFilter.value = "default";
-    selectedGenre = "";
-
-    updateGenreTags();
-    updateCatalog();
-  }
-
-  searchInput.addEventListener("input", updateCatalog);
-
-  document.getElementById("searchForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    updateCatalog();
-
-    document.querySelector(".catalog-section").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  });
-
-  genreFilter.addEventListener("change", function () {
-    selectedGenre = genreFilter.value;
-    updateGenreTags();
-    updateCatalog();
-  });
-
-  yearFilter.addEventListener("change", updateCatalog);
-  statusFilter.addEventListener("change", updateCatalog);
-  languageFilter.addEventListener("change", updateCatalog);
-  sortFilter.addEventListener("change", updateCatalog);
-
-  genreTags.querySelectorAll(".tag").forEach(function (tag) {
-    tag.addEventListener("click", function () {
-      selectedGenre = tag.dataset.genre ?? "";
-      genreFilter.value = selectedGenre;
-
-      updateGenreTags();
-      updateCatalog();
-    });
-  });
-
-  document.getElementById("resetBtn").addEventListener("click", resetFilters);
-  document.getElementById("emptyResetBtn").addEventListener("click", resetFilters);
-
-  menuBtn.addEventListener("click", function () {
-    const isOpen = navLinks.classList.toggle("open");
-    menuBtn.setAttribute("aria-expanded", String(isOpen));
-  });
-
-  document.getElementById("currentYear").textContent =
-    new Date().getFullYear();
 
   const params = new URLSearchParams(window.location.search);
   searchInput.value = params.get("q") ?? "";
