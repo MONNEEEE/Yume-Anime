@@ -17,17 +17,32 @@ const animeData = [
     synopsis:
       "เรื่องราวของฟรีเรน เอลฟ์นักเวทที่ออกเดินทางเพื่อทำความเข้าใจความหมายของชีวิตและความสัมพันธ์ หลังการเดินทางของผู้กล้าสิ้นสุดลง",
     studio: "Madhouse",
-    videos: {
-      1: {
-        dub: { url: "", type: "mp4" },
-        sub: { url: "", type: "mp4" }
-      },
-      2: {
-        dub: { url: "", type: "mp4" },
-        sub: { url: "", type: "mp4" }
-      }
+videos: {
+  1: {
+    dub: {
+      url: "https://example.com/video-dub.mp4",
+      type: "mp4",
+      externalUrl: "https://example.com/watch-dub"
+    },
+    sub: {
+      url: "https://example.com/video-sub.mp4",
+      type: "mp4",
+      externalUrl: "https://example.com/watch-sub"
     }
   },
+  2: {
+    dub: {
+      url: "",
+      type: "mp4",
+      externalUrl: ""
+    },
+    sub: {
+      url: "",
+      type: "mp4",
+      externalUrl: ""
+    }
+  }
+}
 
   {
     id: "dandadan",
@@ -47,16 +62,33 @@ const animeData = [
       "เรื่องราวของโมโมะและโอคารุนที่เข้าไปพัวพันกับเหตุการณ์เหนือธรรมชาติ ทั้งเรื่องวิญญาณและมนุษย์ต่างดาว",
     studio: "Science SARU",
     videos: {
-      1: {
-        dub: { url: "", type: "mp4" },
-        sub: { url: "", type: "mp4" }
-      },
-      2: {
-        dub: { url: "", type: "mp4" },
-        sub: { url: "", type: "mp4" }
-      }
+      1: 
+videos: {
+  1: {
+    dub: {
+      url: "https://example.com/video-dub.mp4",
+      type: "mp4",
+      externalUrl: "https://example.com/watch-dub"
+    },
+    sub: {
+      url: "https://example.com/video-sub.mp4",
+      type: "mp4",
+      externalUrl: "https://example.com/watch-sub"
+    }
+  },
+  2: {
+    dub: {
+      url: "",
+      type: "mp4",
+      externalUrl: ""
+    },
+    sub: {
+      url: "",
+      type: "mp4",
+      externalUrl: ""
     }
   }
+}
 ];
 
 // ทำให้หน้า HTML สามารถเข้าถึงข้อมูลอนิเมะได้
