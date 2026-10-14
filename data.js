@@ -1,9 +1,8 @@
+
 const animeData = [
   {
     id: "frieren",
     title: "คำอธิษฐานในวันที่จากลา Frieren",
-    titleThai: "คำอธิษฐานในวันที่จากลา",
-    titleEnglish: "Frieren: Beyond Journey's End",
     originalTitle: "葬送のフリーレン",
     year: 2023,
     status: "จบแล้ว",
@@ -12,33 +11,53 @@ const animeData = [
     dubbedThai: true,
     subbedThai: true,
     popular: true,
-    latest: true,
+    latest: false,
     airing: false,
     cover: "",
-    synopsis: "เรื่องราวของฟรีเรน เอลฟ์ผู้เดินทางต่อหลังจบการผจญภัยของผู้กล้า",
+    synopsis:
+      "เรื่องราวของฟรีเรน เอลฟ์นักเวทที่ออกเดินทางเพื่อทำความเข้าใจความหมายของชีวิตและความสัมพันธ์ หลังการเดินทางของผู้กล้าสิ้นสุดลง",
     studio: "Madhouse",
-    videos: {}
+    videos: {
+      1: {
+        dub: { url: "", type: "mp4" },
+        sub: { url: "", type: "mp4" }
+      },
+      2: {
+        dub: { url: "", type: "mp4" },
+        sub: { url: "", type: "mp4" }
+      }
+    }
   },
+
   {
     id: "dandadan",
     title: "ดันดาดัน Dandadan",
-    titleThai: "ดันดาดัน",
-    titleEnglish: "DAN DA DAN",
     originalTitle: "ダンダダン",
     year: 2024,
     status: "จบแล้ว",
     episodes: 12,
-    genres: ["Action", "Comedy", "Supernatural"],
+    genres: ["Action", "Comedy", "Fantasy"],
     dubbedThai: true,
     subbedThai: true,
     popular: true,
     latest: false,
     airing: false,
     cover: "",
-    synopsis: "เรื่องราวของวัยรุ่นที่เข้าไปพัวพันกับเรื่องเหนือธรรมชาติและมนุษย์ต่างดาว",
+    synopsis:
+      "เรื่องราวของโมโมะและโอคารุนที่เข้าไปพัวพันกับเหตุการณ์เหนือธรรมชาติ ทั้งเรื่องวิญญาณและมนุษย์ต่างดาว",
     studio: "Science SARU",
-    videos: {}
+    videos: {
+      1: {
+        dub: { url: "", type: "mp4" },
+        sub: { url: "", type: "mp4" }
+      },
+      2: {
+        dub: { url: "", type: "mp4" },
+        sub: { url: "", type: "mp4" }
+      }
+    }
   }
 ];
 
+// ทำให้หน้า HTML สามารถเข้าถึงข้อมูลอนิเมะได้
 window.animeData = animeData;
