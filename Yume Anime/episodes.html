@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff5f9">
+<title>รายการตอน | Yume Anime</title>
+
+<style>
+:root {
+  --pink: #ed8db5;
+  --pink-dark: #cf6092;
+  --bg: #fff9fc;
+  --text: #51434b;
+  --muted: #96838d;
+  --border: #f4dce7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans Thai", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a { color: inherit; text-decoration: none; }
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255,249,252,.96);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  max-width: 1000px;
+  min-height: 64px;
+  padding: 12px 18px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--pink-dark);
+}
+
+.logo span { color: #6b5260; }
+
+.back {
+  color: var(--pink-dark);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.container {
+  width: min(900px, calc(100% - 28px));
+  margin: auto;
+}
+
+.breadcrumb {
+  padding: 22px 0 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.breadcrumb a { color: var(--pink-dark); }
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffe9f2, #fff8fc);
+}
+
+.poster {
+  width: 95px;
+  height: 125px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #f7ddea;
+}
+
+.poster-placeholder {
+  width: 95px;
+  height: 125px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #f7ddea;
+  color: var(--pink-dark);
+  font-size: 32px;
+}
+
+.hero h1 {
+  font-size: 20px;
+  line-height: 1.5;
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.section-title {
+  margin: 27px 0 14px;
+  font-size: 18px;
+}
+
+.section-title span { color: var(--pink-dark); }
+
+.episode-list {
+  display: grid;
+  gap: 11px;
+  padding-bottom: 35px;
+}
+
+.episode {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.episode:active {
+  transform: scale(.985);
+}
+
+.episode-number {
+  width: 47px;
+  height: 47px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #fff0f6;
+  color: var(--pink-dark);
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.episode-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.episode-info h3 {
+  margin: 0 0 5px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.episode-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.play {
+  color: var(--pink-dark);
+  font-size: 20px;
+}
+
+.message {
+  padding: 30px 18px;
+  text-align: center;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  line-height: 1.8;
+}
+
+.message p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: var(--pink);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.footer {
+  padding: 26px 15px;
+  text-align: center;
+  background: #fff0f6;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.footer strong { color: var(--pink-dark); }
+
+@media (max-width: 480px) {
+  .hero { padding: 14px; gap: 13px; }
+  .hero h1 { font-size: 17px; }
+  .episode { padding: 12px; gap: 11px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="logo">🌸 Yume<span>Anime</span></a>
+    <a href="catalog.html" class="back">← คลังอนิเมะ</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="breadcrumb">
+    <a href="index.html">หน้าแรก</a>
+   　›　
+    <a href="catalog.html">อนิเมะทั้งหมด</a>
+   　›　
+    รายการตอน
+  </div>
+
+  <section class="hero" id="animeHeader">
+    <div class="poster-placeholder">🌸</div>
+    <div>
+      <h1>กำลังโหลดข้อมูล...</h1>
+      <p>Yume Anime ♡</p>
+    </div>
+  </section>
+
+  <h2 class="section-title"><span>♡</span> รายชื่อตอน</h2>
+
+  <div id="episodeList" class="episode-list"></div>
+</main>
+
+<footer class="footer">
+  <strong>🌸 Yume Anime</strong><br>
+  พื้นที่เล็ก ๆ สำหรับคนรักอนิเมะ ♡<br>
+  © <span id="currentYear"></span> Yume Anime
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+const data = Array.isArray(window.animeData)
+  ? window.animeData
+  : [];
+
+const anime = data.find(item => String(item.id) === String(id));
+
+document.getElementById("currentYear").textContent =
+  new Date().getFullYear();
+
+const header = document.getElementById("animeHeader");
+const list = document.getElementById("episodeList");
+
+if (!anime) {
+  header.innerHTML = `
+    <div>
+      <h1>ยังไม่พบอนิเมะเรื่องนี้ 🌸</h1>
+      <p>ลองกลับไปเลือกอนิเมะจากคลังก่อนนะ</p>
+      <a class="btn" href="catalog.html">กลับไปคลังอนิเมะ</a>
+    </div>`;
+
+  list.innerHTML = "";
+} else {
+  const title = anime.title ?? anime.name ?? "ไม่ระบุชื่อ";
+  const cover = anime.cover ?? anime.image ?? "";
+
+  header.innerHTML = `
+    ${
+      cover
+        ? `<img class="poster"
+             src="${escapeAttribute(cover)}"
+             alt="ปกอนิเมะ"
+             onerror="this.outerHTML='<div class=&quot;poster-placeholder&quot;>🌸</div>'">`
+        : `<div class="poster-placeholder">🌸</div>`
+    }
+    <div>
+      <h1>${escapeHTML(title)}</h1>
+      <p>${escapeHTML(anime.originalTitle ?? "Yume Anime")}</p>
+      <p>จำนวนตอนที่บันทึกไว้: ${anime.episodes ?? "ยังไม่ระบุ"}</p>
+    </div>`;
+
+  const count = Number(anime.episodes);
+  const validCount = Number.isInteger(count) && count > 0
+    ? Math.min(count, 500)
+    : 0;
+
+  if (validCount === 0) {
+    list.innerHTML = `
+      <div class="message">
+        <div style="font-size:32px">📚</div>
+        <strong>ยังไม่มีข้อมูลจำนวนตอน</strong>
+        <p>เพิ่มจำนวนตอนในฐานข้อมูลของอนิเมะเรื่องนี้ก่อนนะ</p>
+      </div>`;
+  } else {
+    list.innerHTML = Array.from(
+      { length: validCount },
+      (_, index) => {
+        const episode = index + 1;
+
+        return `
+          <a class="episode"
+             href="watch.html?id=${encodeURIComponent(anime.id)}&episode=${episode}">
+            <div class="episode-number">${String(episode).padStart(2, "0")}</div>
+            <div class="episode-info">
+              <h3>ตอนที่ ${episode}</h3>
+              <p>${escapeHTML(title)}</p>
+            </div>
+            <span class="play">▶</span>
+          </a>`;
+      }
+    ).join("");
+  }
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function escapeAttribute(value) {
+  return escapeHTML(value);
+}
+</script>
+
+</body>
+</html>
