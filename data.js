@@ -42,8 +42,7 @@ videos: {
       externalUrl: ""
     }
   }
-}
-
+},
   {
     id: "dandadan",
     title: "ดันดาดัน Dandadan",
@@ -88,7 +87,7 @@ videos: {
       externalUrl: ""
     }
   }
-}
+},
 ];
 
 // ทำให้หน้า HTML สามารถเข้าถึงข้อมูลอนิเมะได้
