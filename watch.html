@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ดูอนิเมะ | Yume Anime</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fff7fb;
+      color: #594854;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    header {
+      padding: 20px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border-bottom: 2px solid #f7d9e7;
+    }
+
+    .logo {
+      color: #d65e95;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .back-link {
+      color: #d65e95;
+      font-weight: bold;
+    }
+
+    nav {
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: #d65e95;
+      font-size: 14px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 950px;
+      margin: auto;
+      padding: 8px 14px 40px;
+    }
+
+    .card {
+      background: white;
+      border: 2px solid #f5d9e6;
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .player {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #251c29;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .player-message {
+      max-width: 500px;
+    }
+
+    .player-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .player-message h2 {
+      font-size: 21px;
+      margin: 8px 0;
+    }
+
+    .player-message p {
+      color: #dfd1dc;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    h1 {
+      font-size: 23px;
+      line-height: 1.5;
+      margin: 0 0 8px;
+      overflow-wrap: anywhere;
+    }
+
+    h2 {
+      font-size: 21px;
+      margin: 0 0 16px;
+    }
+
+    .muted {
+      color: #a18b99;
+      line-height: 1.7;
+    }
+
+    .language-box {
+      padding: 22px;
+      margin-bottom: 20px;
+      border: 2px solid #f5d9e6;
+      border-radius: 22px;
+      background: white;
+    }
+
+    .language-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .language-btn {
+      min-height: 54px;
+      padding: 12px 6px;
+      border: 2px solid #f0c9dc;
+      border-radius: 15px;
+      background: #fff;
+      color: #d65e95;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .language-btn.active {
+      background: #ed86b4;
+      color: white;
+      border-color: #ed86b4;
+    }
+
+    #languageMessage {
+      margin: 15px 0 0;
+      color: #947d8a;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .episode-box {
+      padding: 22px;
+    }
+
+    .episode-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .episode-btn {
+      padding: 13px 4px;
+      border: 2px solid #f5d9e6;
+      border-radius: 13px;
+      background: white;
+      color: #d65e95;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .episode-btn.active {
+      background: #ed86b4;
+      color: white;
+      border-color: #ed86b4;
+    }
+
+    .navigation {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .nav-btn {
+      min-height: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 10px 5px;
+      border: 2px solid #f5d9e6;
+      border-radius: 13px;
+      background: white;
+      color: #d65e95;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .nav-btn.primary {
+      background: #ed86b4;
+      color: white;
+      border-color: #ed86b4;
+    }
+
+    .nav-btn.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .synopsis {
+      padding: 22px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 380px) {
+      .logo {
+        font-size: 20px;
+      }
+
+      .language-btn {
+        font-size: 13px;
+      }
+
+      .episode-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="logo" href="index.html">🌸 Yume Anime</a>
+    <a class="back-link" href="catalog.html">← คลังอนิเมะ</a>
+  </header>
+
+  <nav>
+    <a href="index.html">หน้าแรก</a>
+    <span>›</span>
+    <a href="catalog.html">อนิเมะทั้งหมด</a>
+    <span>›</span>
+    <a id="episodeLink" href="catalog.html">รายการตอน</a>
+  </nav>
+
+  <main>
+    <div id="pageContent">
+      <p class="muted">กำลังโหลดข้อมูล...</p>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
+      const requestedEpisode = Number(params.get("episode") || 1);
+
+      const data = window.animeData || [];
+      const anime = data.find(function (item) {
+        return String(item.id) === String(id);
+      });
+
+      const page = document.getElementById("pageContent");
+
+      if (!anime) {
+        page.innerHTML = `
+          <section class="card content">
+            <h2>🌸 ไม่พบอนิเมะเรื่องนี้</h2>
+            <p class="muted">ลองกลับไปเลือกอนิเมะจากคลังอีกครั้งนะ</p>
+            <a class="back-link" href="catalog.html">← กลับไปคลังอนิเมะ</a>
+          </section>
+        `;
+        return;
+      }
+
+      const count = Number(anime.episodes);
+      const total = Number.isInteger(count) && count > 0
+        ? Math.min(count, 500)
+        : 1;
+
+      let episode = Number.isInteger(requestedEpisode)
+        ? Math.max(1, Math.min(requestedEpisode, total))
+        : 1;
+
+      // ตัวแปรนี้อยู่ในฟังก์ชันเดียวกับปุ่มและระบบเปลี่ยนภาษา
+      let selectedLanguage = "dub";
+
+      page.innerHTML = `
+        <section class="card">
+          <div class="player" id="player">
+            <div class="player-message">
+              <div class="player-icon">🌸</div>
+              <h2>Yume Anime</h2>
+              <p>เลือกภาษาและตอนที่ต้องการรับชมได้เลย</p>
+            </div>
+          </div>
+
+          <div class="content">
+            <h1 id="animeTitle"></h1>
+            <p class="muted" id="episodeTitle"></p>
+
+            <div class="navigation">
+              <a class="nav-btn" id="prevBtn">← ตอนก่อนหน้า</a>
+              <a class="nav-btn primary" id="listBtn">📚 รายการตอน</a>
+              <a class="nav-btn" id="nextBtn">ตอนถัดไป →</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="language-box">
+          <h2>♡ เลือกภาษา</h2>
+
+          <div class="language-buttons">
+            <button
+              type="button"
+              id="dubBtn"
+              class="language-btn active">
+              🇹🇭 พากย์ไทย
+            </button>
+
+            <button
+              type="button"
+              id="subBtn"
+              class="language-btn">
+              💬 ซับไทย
+            </button>
+          </div>
+
+          <p id="languageMessage" aria-live="polite">
+            เลือกภาษาที่ต้องการรับชม 💗
+          </p>
+        </section>
+
+        <section class="card episode-box">
+          <h2>♡ เลือกตอน</h2>
+          <div class="episode-grid" id="episodeGrid"></div>
+        </section>
+
+        <section class="card synopsis">
+          <h2>🌸 เรื่องย่อ</h2>
+          <p id="synopsisText"></p>
+        </section>
+      `;
+
+      document.getElementById("animeTitle").textContent = anime.title;
+      document.getElementById("episodeTitle").textContent =
+        "ตอนที่ " + episode + " · " + (anime.status || "");
+
+      document.getElementById("synopsisText").textContent =
+        anime.synopsis || "ยังไม่มีเรื่องย่อ";
+
+      function watchUrl(number) {
+        return "watch.html?id=" +
+          encodeURIComponent(anime.id) +
+          "&episode=" + number;
+      }
+
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      prevBtn.href = watchUrl(Math.max(1, episode - 1));
+      nextBtn.href = watchUrl(Math.min(total, episode + 1));
+
+      document.getElementById("listBtn").href =
+        "episodes.html?id=" + encodeURIComponent(anime.id);
+
+      document.getElementById("episodeLink").href =
+        "episodes.html?id=" + encodeURIComponent(anime.id);
+
+      if (episode <= 1) {
+        prevBtn.classList.add("disabled");
+      }
+
+      if (episode >= total) {
+        nextBtn.classList.add("disabled");
+      }
+
+      const grid = document.getElementById("episodeGrid");
+
+      for (let n = 1; n <= total; n++) {
+        const btn = document.createElement("button");
+
+        btn.type = "button";
+        btn.className =
+          "episode-btn" + (n === episode ? " active" : "");
+        btn.textContent = "ตอน " + n;
+
+        btn.addEventListener("click", function () {
+          location.href = watchUrl(n);
+        });
+
+        grid.appendChild(btn);
+      }
+
+      function getVideoSource(language) {
+        const videos = anime.videos || {};
+        const episodeData = videos[episode];
+
+        if (!episodeData) {
+          return null;
+        }
+
+        const source = episodeData[language];
+
+        if (!source || typeof source.url !== "string") {
+          return null;
+        }
+
+        if (!source.url.trim()) {
+          return null;
+        }
+
+        if (source.type !== "mp4" && source.type !== "embed") {
+          return null;
+        }
+
+        return source;
+      }
+
+      function renderSelectedVideo() {
+        const player = document.getElementById("player");
+        const message = document.getElementById("languageMessage");
+        const dubBtn = document.getElementById("dubBtn");
+        const subBtn = document.getElementById("subBtn");
+
+        dubBtn.classList.toggle(
+          "active",
+          selectedLanguage === "dub"
+        );
+
+        subBtn.classList.toggle(
+          "active",
+          selectedLanguage === "sub"
+        );
+
+        const source = getVideoSource(selectedLanguage);
+
+        if (!source) {
+          player.innerHTML = `
+            <div class="player-message">
+              <div class="player-icon">🌸</div>
+              <h2>ยังไม่มีวิดีโอภาษานี้</h2>
+              <p>เมื่อเพิ่มลิงก์วิดีโอที่ใช้งานได้แล้ว จะสามารถเล่นจากหน้านี้ได้</p>
+            </div>
+          `;
+
+          message.textContent = selectedLanguage === "dub"
+            ? "เลือกพากย์ไทยแล้ว · ยังไม่มีลิงก์วิดีโอ"
+            : "เลือกซับไทยแล้ว · ยังไม่มีลิงก์วิดีโอ";
+
+          return;
+        }
+
+        let url;
+
+        try {
+          url = new URL(source.url);
+        } catch (error) {
+          player.textContent = "ลิงก์วิดีโอไม่ถูกต้อง";
+          message.textContent = "โปรดตรวจสอบลิงก์วิดีโอ";
+          return;
+        }
+
+        if (url.protocol !== "https:") {
+          player.textContent = "ลิงก์วิดีโอต้องใช้ HTTPS";
+          message.textContent = "โปรดใช้ลิงก์ HTTPS ที่ปลอดภัย";
+          return;
+        }
+
+        if (source.type === "mp4") {
+          const video = document.createElement("video");
+
+          video.controls = true;
+          video.playsInline = true;
+          video.preload = "metadata";
+          video.style.cssText =
+            "position:absolute;inset:0;width:100%;height:100%;";
+
+          const videoSource = document.createElement("source");
+          videoSource.src = url.href;
+          videoSource.type = "video/mp4";
+
+          video.appendChild(videoSource);
+          player.replaceChildren(video);
+        } else {
+          const frame = document.createElement("iframe");
+
+          frame.src = url.href;
+          frame.title = "เครื่องเล่นอนิเมะ";
+          frame.allowFullscreen = true;
+          frame.allow = "fullscreen; picture-in-picture";
+          frame.style.cssText =
+            "position:absolute;inset:0;width:100%;height:100%;border:0;";
+
+          player.replaceChildren(frame);
+        }
+
+        message.textContent = selectedLanguage === "dub"
+          ? "กำลังเลือกวิดีโอพากย์ไทย"
+          : "กำลังเลือกวิดีโอซับไทย";
+      }
+
+      // ปุ่มทั้งสองอยู่ในขอบเขตเดียวกับ selectedLanguage
+      document.getElementById("dubBtn").addEventListener(
+        "click",
+        function () {
+          selectedLanguage = "dub";
+          renderSelectedVideo();
+        }
+      );
+
+      document.getElementById("subBtn").addEventListener(
+        "click",
+        function () {
+          selectedLanguage = "sub";
+          renderSelectedVideo();
+        }
+      );
+
+      // แสดงหน้าจอเริ่มต้น
+      renderSelectedVideo();
+    })();
+  </script>
+</body>
+</html>
