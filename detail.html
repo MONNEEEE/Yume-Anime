@@ -1,801 +1,749 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#fff4f8">
-<meta name="description" content="รายละเอียดอนิเมะและรายชื่อตอน | Yume Anime">
-<title>รายละเอียดอนิเมะ | Yume Anime</title>
-
-<style>
-:root {
-  --pink: #f18db5;
-  --pink-dark: #dc6697;
-  --bg: #fff9fc;
-  --text: #51434b;
-  --muted: #9b8791;
-  --border: #f7dce8;
-  --shadow: 0 8px 25px rgba(211,125,164,.10);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Noto Sans Thai", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: rgba(255,249,252,.96);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-}
-
-.nav {
-  max-width: 1120px;
-  min-height: 68px;
-  padding: 12px 20px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 900;
-  color: var(--pink-dark);
-  white-space: nowrap;
-}
-
-.logo span {
-  color: #6d5261;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.nav-links a:hover {
-  color: var(--pink-dark);
-}
-
-.menu-btn {
-  display: none;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 9px 12px;
-  background: white;
-  color: var(--pink-dark);
-}
-
-.container {
-  width: min(1060px, calc(100% - 32px));
-  margin: auto;
-}
-
-.breadcrumb {
-  margin: 23px 0;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.breadcrumb a {
-  color: var(--pink-dark);
-}
-
-.detail-hero {
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 240px minmax(0,1fr);
-  gap: 30px;
-  padding: 28px;
-  border: 1px solid var(--border);
-  border-radius: 25px;
-  background: linear-gradient(135deg,#ffe7f0,#fff5fa 60%,#f5eaff);
-  box-shadow: var(--shadow);
-}
-
-.poster {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  border-radius: 17px;
-  background: linear-gradient(135deg,#ffdce9,#eadfff);
-  box-shadow: 0 8px 22px rgba(180,105,144,.15);
-}
-
-.poster img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.poster-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: #c96f98;
-  font-size: 48px;
-}
-
-.poster-placeholder small {
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.info {
-  min-width: 0;
-  align-self: center;
-}
-
-.eyebrow {
-  display: inline-block;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: white;
-  color: var(--pink-dark);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-h1 {
-  margin: 15px 0 5px;
-  font-size: clamp(25px,4vw,36px);
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-}
-
-.original-title {
-  margin: 0 0 15px;
-  color: #997e8d;
-  font-size: 15px;
-  overflow-wrap: anywhere;
-}
-
-.meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 15px 0;
-}
-
-.meta span,
-.genre-tag,
-.language-tag {
-  display: inline-block;
-  border-radius: 9px;
-  padding: 7px 10px;
-  background: white;
-  border: 1px solid var(--border);
-  color: #765b6a;
-  font-size: 12px;
-  font-weight: 750;
-}
-
-.language-row,
-.genre-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin: 12px 0;
-}
-
-.language-tag {
-  color: #a04470;
-  background: #ffe5f0;
-  border-color: #f7d0e1;
-}
-
-.primary-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  margin-top: 12px;
-  padding: 13px 19px;
-  border: 0;
-  border-radius: 13px;
-  background: var(--pink);
-  color: white;
-  font-weight: 850;
-  transition: .2s;
-}
-
-.primary-btn:hover {
-  background: var(--pink-dark);
-  transform: translateY(-2px);
-}
-
-.secondary-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 12px 0 0 7px;
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  background: white;
-  color: var(--pink-dark);
-  font-weight: 800;
-}
-
-.section {
-  margin-top: 28px;
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: 21px;
-  background: white;
-  box-shadow: var(--shadow);
-}
-
-.section-title {
-  margin: 0 0 16px;
-  font-size: 20px;
-}
-
-.synopsis {
-  margin: 0;
-  font-size: 14px;
-  line-height: 2;
-  color: #786573;
-  white-space: pre-line;
-}
-
-.facts {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 12px;
-}
-
-.fact {
-  padding: 14px;
-  border-radius: 13px;
-  background: #fff6fa;
-  border: 1px solid #f9e5ee;
-}
-
-.fact-label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.fact-value {
-  font-size: 14px;
-  font-weight: 800;
-  overflow-wrap: anywhere;
-}
-
-.episode-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 17px;
-}
-
-.episode-heading .section-title {
-  margin: 0;
-}
-
-.episode-count {
-  color: var(--pink-dark);
-  font-size: 12px;
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.episode-grid {
-  display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 11px;
-}
-
-.episode-card {
-  display: block;
-  padding: 16px 10px;
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  background: #fff8fb;
-  text-align: center;
-  transition: .2s;
-}
-
-.episode-card:hover {
-  border-color: var(--pink);
-  background: #fff0f6;
-  transform: translateY(-2px);
-}
-
-.episode-icon {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 22px;
-}
-
-.episode-name {
-  display: block;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.episode-sub {
-  display: block;
-  margin-top: 5px;
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.not-found {
-  margin: 45px 0;
-  padding: 45px 20px;
-  border: 1px dashed #efbfd4;
-  border-radius: 22px;
-  background: white;
-  text-align: center;
-}
-
-.not-found .emoji {
-  font-size: 48px;
-}
-
-.not-found h1 {
-  font-size: 25px;
-}
-
-.not-found p {
-  color: var(--muted);
-  line-height: 1.8;
-}
-
-.footer {
-  margin-top: 50px;
-  padding: 28px 16px;
-  border-top: 1px solid var(--border);
-  background: #fff3f8;
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.9;
-}
-
-.footer strong {
-  color: var(--pink-dark);
-}
-
-@media (max-width:700px) {
-  .nav {
-    min-height: 62px;
-  }
-
-  .logo {
-    font-size: 19px;
-  }
-
-  .menu-btn {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 61px;
-    left: 0;
-    right: 0;
-    padding: 12px 20px;
-    background: #fff9fc;
-    border-bottom: 1px solid var(--border);
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
-
-  .nav-links.open {
-    display: flex;
-  }
-
-  .nav-links a {
-    padding: 13px 4px;
-    border-bottom: 1px solid #f9e5ee;
-  }
-
-  .detail-hero {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 18px;
-  }
-
-  .poster {
-    width: min(220px,75%);
-    margin: auto;
-  }
-
-  .info {
-    align-self: auto;
-  }
-
-  h1 {
-    font-size: 27px;
-  }
-
-  .section {
-    padding: 18px;
-  }
-
-  .section-title {
-    font-size: 18px;
-  }
-
-  .episode-grid {
-    grid-template-columns: repeat(3,minmax(0,1fr));
-    gap: 9px;
-  }
-
-  .primary-btn,
-  .secondary-btn {
-    font-size: 13px;
-  }
-}
-
-@media (max-width:390px) {
-  .episode-grid {
-    grid-template-columns: repeat(2,minmax(0,1fr));
-  }
-
-  .facts {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff5fa">
+  <title>รายละเอียดอนิเมะ | Yume Anime</title>
+  <meta name="description" content="รายละเอียดอนิเมะ เรื่องย่อ ข้อมูล และรายการตอนที่ Yume Anime">
+
+  <style>
+    :root {
+      --pink: #ff78ad;
+      --pink-dark: #ed5794;
+      --pink-light: #fff0f6;
+      --bg: #fff8fb;
+      --card: #ffffff;
+      --text: #493744;
+      --muted: #927e8d;
+      --border: #f4dce8;
+      --shadow: 0 8px 28px rgba(205, 111, 157, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans Thai", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      min-height: 68px;
+      margin: auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--pink-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--pink-dark);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--border);
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      border-radius: 12px;
+      padding: 7px 12px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--pink-dark);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: linear-gradient(135deg, #fff0f7, #fffafd 60%, #f9efff);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      right: 25px;
+      top: 8px;
+      font-size: 90px;
+      color: rgba(255, 120, 173, 0.12);
+      pointer-events: none;
+    }
+
+    .anime-header {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .poster {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #ffe0ee, #f4e5ff);
+      box-shadow: 0 8px 24px rgba(205, 111, 157, 0.16);
+      color: var(--pink-dark);
+      text-align: center;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .poster-placeholder {
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .eyebrow {
+      color: var(--pink-dark);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 6px 0 2px;
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .original-title {
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: white;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .badge.pink {
+      border-color: #ffc4dc;
+      background: #ffe5f0;
+      color: #c73d7c;
+    }
+
+    .genres {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+
+    .genre {
+      padding: 4px 10px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #846579;
+      font-size: 12px;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-size: 20px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 5px;
+      height: 24px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: var(--pink);
+    }
+
+    .synopsis {
+      margin: 0;
+      color: #715c6c;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .fact {
+      padding: 15px;
+      border: 1px solid #f8e5ee;
+      border-radius: 15px;
+      background: #fff9fc;
+      min-width: 0;
+    }
+
+    .fact-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .fact-value {
+      margin-top: 4px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .episode-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .episode {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: #fffafd;
+    }
+
+    .episode-number {
+      font-weight: 900;
+      color: var(--pink-dark);
+    }
+
+    .episode-modes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .watch-link {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 9px;
+      background: var(--pink-light);
+      color: #c73d7c;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .watch-link:hover {
+      background: #ffdfed;
+    }
+
+    .empty-note {
+      grid-column: 1 / -1;
+      padding: 20px;
+      border: 1px dashed #edc6d9;
+      border-radius: 15px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+      color: var(--pink-dark);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .not-found {
+      padding: 45px 20px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: white;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .not-found h1 {
+      font-size: 26px;
+    }
+
+    .not-found p {
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 25px 20px;
+      border-top: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .nav-inner {
+        min-height: 60px;
+        padding: 10px 16px;
+      }
+
+      .logo {
+        font-size: 21px;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 14px 20px 18px;
+        border-bottom: 1px solid var(--border);
+        background: white;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .container {
+        padding: 20px 14px 40px;
+      }
+
+      .hero {
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      .anime-header {
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 15px;
+      }
+
+      .poster {
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .badges {
+        gap: 6px;
+        margin: 12px 0;
+      }
+
+      .badge {
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+
+      .section {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .episode-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 380px) {
+      .anime-header {
+        grid-template-columns: 1fr;
+      }
+
+      .poster {
+        width: 155px;
+      }
+
+      .facts {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">Yume <span>Anime</span> ♡</a>
 
-<header class="header">
-  <nav class="nav">
-    <a href="index.html" class="logo">🌸 Yume<span>Anime</span></a>
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >☰ เมนู</button>
 
-    <button class="menu-btn" id="menuBtn"
-      type="button" aria-expanded="false" aria-controls="navLinks">
-      ☰ เมนู
-    </button>
-
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">หน้าแรก</a>
-      <a href="catalog.html">อนิเมะทั้งหมด</a>
-      <a href="dubbed.html">พากย์ไทย</a>
-      <a href="subbed.html">ซับไทย</a>
-      <a href="schedule.html">ตารางฉาย</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">หน้าแรก</a>
+        <a href="catalog.html">อนิเมะทั้งหมด</a>
+      </nav>
     </div>
-  </nav>
-</header>
+  </header>
 
-<main class="container">
-  <div class="breadcrumb">
-    <a href="index.html">หน้าแรก</a>
-   　›　
-    <a href="catalog.html">อนิเมะทั้งหมด</a>
-   　›　
-    <span id="breadcrumbTitle">รายละเอียด</span>
-  </div>
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="index.html">หน้าแรก</a>
+      ›
+      <a href="catalog.html">อนิเมะทั้งหมด</a>
+      › รายละเอียดอนิเมะ
+    </div>
 
-  <div id="detailContent"></div>
-</main>
+    <div id="detailContent" aria-live="polite">
+      <div class="not-found">
+        <h1>กำลังโหลดข้อมูลอนิเมะ...</h1>
+        <p>รอสักครู่นะ ♡</p>
+      </div>
+    </div>
+  </main>
 
-<footer class="footer">
-  <strong>🌸 Yume Anime</strong><br>
-  พื้นที่เล็ก ๆ สำหรับคนรักอนิเมะ ♡<br>
-  © <span id="currentYear"></span> Yume Anime
-</footer>
+  <footer>
+    <div>♡ Yume Anime — พื้นที่เล็ก ๆ สำหรับคนรักอนิเมะ ♡</div>
+    <div>© <span id="currentYear"></span> Yume Anime</div>
+  </footer>
 
-<script src="data.js"></script>
+  <script src="data.js"></script>
 
-<script>
-(function () {
-  "use strict";
+  <script>
+    (function () {
+      "use strict";
 
-  const content = document.getElementById("detailContent");
-  const params = new URLSearchParams(window.location.search);
-  const animeId = params.get("id");
+      const content = document.getElementById("detailContent");
+      const params = new URLSearchParams(window.location.search);
 
-  function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, function (char) {
-      return {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      }[char];
-    });
-  }
+      // อ่าน ID จาก URL เพียงครั้งเดียว ป้องกันการประกาศตัวแปรซ้ำ
+      const animeId = (params.get("id") || "").trim();
 
-  function getGenres(anime) {
-    const genres = anime.genres ?? anime.genre ?? [];
-    return Array.isArray(genres) ? genres : [genres];
-  }
+      function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, function (char) {
+          const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+          };
+          return entities[char];
+        });
+      }
 
-  function showNotFound() {
-    document.title = "ไม่พบอนิเมะ | Yume Anime";
-
-    content.innerHTML = `
-      <section class="not-found">
-        <div class="emoji">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
-        <h1>ไม่พบอนิเมะเรื่องนี้ 🌸</h1>
-        <p>
-          อาจไม่มีข้อมูลเรื่องนี้ หรือรหัสอนิเมะไม่ถูกต้อง<br>
-          ลองกลับไปเลือกเรื่องจากคลังอนิเมะอีกครั้งนะ
-        </p>
-        <a class="primary-btn" href="catalog.html">
-          กลับไปคลังอนิเมะ
-        </a>
-      </section>
-    `;
-  }
-
-  function renderDetail(anime) {
-    const title = anime.title ?? anime.name ?? "ยังไม่มีชื่อ";
-    const titleThai = anime.titleThai ?? "";
-    const titleEnglish = anime.titleEnglish ?? anime.englishTitle ?? "";
-    const originalTitle = anime.originalTitle ?? anime.japaneseTitle ?? "";
-    const year = anime.year ?? "ไม่ระบุ";
-    const status = anime.status ?? "ไม่ระบุ";
-    const episodes = Math.max(0, Number(anime.episodes) || 0);
-    const synopsis = anime.synopsis ?? "ยังไม่มีเรื่องย่อ";
-    const studio = anime.studio ?? "ยังไม่มีข้อมูล";
-    const cover = anime.cover ?? anime.image ?? "";
-    const genres = getGenres(anime);
-
-    const hasDub = Boolean(anime.dubbedThai ?? anime.dub ?? false);
-    const hasSub = Boolean(anime.subbedThai ?? anime.sub ?? false);
-
-    const languageTags = [];
-
-    if (hasDub) languageTags.push("พากย์ไทย");
-    if (hasSub) languageTags.push("ซับไทย");
-
-    const coverHTML = cover
-      ? `
-        <img
-          src="${escapeHTML(cover)}"
-          alt="ปก ${escapeHTML(title)}"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="poster-placeholder" style="display:none">
-          🌸<small>Yume Anime</small>
-        </div>
-      `
-      : `
-        <div class="poster-placeholder">
-          🌸<small>Yume Anime</small>
-        </div>
-      `;
-
-    const genresHTML = genres.length
-      ? genres.map(function (genre) {
-          return `<span class="genre-tag">${escapeHTML(genre)}</span>`;
-        }).join("")
-      : '<span class="genre-tag">ยังไม่ระบุแนว</span>';
-
-    const languagesHTML = languageTags.length
-      ? languageTags.map(function (language) {
-          return `<span class="language-tag">${escapeHTML(language)}</span>`;
-        }).join("")
-      : '<span class="language-tag">ยังไม่ระบุภาษา</span>';
-
-    const firstEpisodeURL = episodes > 0
-      ? `watch.html?id=${encodeURIComponent(anime.id)}&episode=1`
-      : "#episodes";
-
-    const episodeCards = Array.from(
-      { length: episodes },
-      function (_, index) {
-        const episodeNumber = index + 1;
-
-        return `
-          <a class="episode-card"
-             href="watch.html?id=${encodeURIComponent(anime.id)}&episode=${episodeNumber}">
-            <span class="episode-icon">▶️</span>
-            <span class="episode-name">ตอนที่ ${episodeNumber}</span>
-            <span class="episode-sub">รับชมอนิเมะ</span>
-          </a>
+      function showNotFound() {
+        content.innerHTML = `
+          <div class="not-found">
+            <div style="font-size:48px">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
+            <h1>ไม่พบข้อมูลอนิเมะเรื่องนี้</h1>
+            <p>อาจไม่มี ID นี้ใน data.js หรือ URL อาจไม่ถูกต้อง</p>
+            <a class="back-link" href="catalog.html">♡ กลับไปหน้าอนิเมะทั้งหมด</a>
+          </div>
         `;
       }
-    ).join("");
 
-    document.title = title + " | Yume Anime";
-    document.getElementById("breadcrumbTitle").textContent = title;
+      function renderDetail(anime) {
+        const title = anime.title || "ไม่ระบุชื่ออนิเมะ";
+        const originalTitle = anime.originalTitle || "";
+        const year = anime.year ?? "ไม่ระบุ";
+        const status = anime.status || "ไม่ระบุ";
+        const episodes = Math.max(0, Number(anime.episodes) || 0);
+        const studio = anime.studio || "ไม่ระบุ";
+        const synopsis = anime.synopsis || "ยังไม่มีเรื่องย่อ";
+        const genres = Array.isArray(anime.genres) ? anime.genres : [];
+        const videos = anime.videos || {};
 
-    content.innerHTML = `
-      <section class="detail-hero">
-        <div class="poster">
-          ${coverHTML}
-        </div>
+        const posterHTML = anime.cover
+          ? `<img src="${escapeHTML(anime.cover)}"
+                 alt="โปสเตอร์ ${escapeHTML(title)}"
+                 onerror="this.parentElement.innerHTML='<div class=&quot;poster-placeholder&quot;>♡<br>ยังไม่มีโปสเตอร์</div>'">`
+          : `<div class="poster-placeholder">♡<br>Yume Anime<br><small>ยังไม่มีโปสเตอร์</small></div>`;
 
-        <div class="info">
-          <span class="eyebrow">୨୧ ANIME INFORMATION ୨୧</span>
+        const genreHTML = genres.length
+          ? genres.map(function (genre) {
+              return `<span class="genre">${escapeHTML(genre)}</span>`;
+            }).join("")
+          : `<span class="genre">ไม่ระบุแนว</span>`;
 
-          <h1>${escapeHTML(title)}</h1>
+        const badges = [
+          `<span class="badge pink">${escapeHTML(status)}</span>`,
+          `<span class="badge">${escapeHTML(year)}</span>`,
+          `<span class="badge">${episodes} ตอน</span>`
+        ];
 
-          ${titleThai && titleThai !== title
-            ? `<p class="original-title">${escapeHTML(titleThai)}</p>`
-            : ""}
+        if (anime.dubbedThai) {
+          badges.push('<span class="badge">พากย์ไทย</span>');
+        }
 
-          ${titleEnglish
-            ? `<p class="original-title">${escapeHTML(titleEnglish)}</p>`
-            : ""}
+        if (anime.subbedThai) {
+          badges.push('<span class="badge">ซับไทย</span>');
+        }
 
-          ${originalTitle
-            ? `<p class="original-title">${escapeHTML(originalTitle)}</p>`
-            : ""}
+        let episodeHTML = "";
 
-          <div class="meta">
-            <span>📅 ${escapeHTML(year)}</span>
-            <span>📺 ${episodes} ตอน</span>
-            <span>🌷 ${escapeHTML(status)}</span>
-          </div>
+        if (episodes > 0) {
+          for (let i = 1; i <= episodes; i++) {
+            const episode = videos[i] || {};
+            const dub = episode.dub || {};
+            const sub = episode.sub || {};
 
-          <div class="genre-row">
-            ${genresHTML}
-          </div>
+            const dubURL = typeof dub.url === "string" ? dub.url.trim() : "";
+            const subURL = typeof sub.url === "string" ? sub.url.trim() : "";
 
-          <div class="language-row">
-            ${languagesHTML}
-          </div>
+            let links = "";
 
-          <a class="primary-btn" href="${firstEpisodeURL}">
-            ▶ เริ่มดูตอนที่ 1
-          </a>
+            if (dubURL) {
+              links += `
+                <a class="watch-link"
+                   href="${escapeHTML(dubURL)}"
+                   target="_blank"
+                   rel="noopener noreferrer">พากย์ไทย</a>`;
+            }
 
-          <a class="secondary-btn" href="#episodes">
-            ดูรายชื่อตอน
-          </a>
-        </div>
-      </section>
+            if (subURL) {
+              links += `
+                <a class="watch-link"
+                   href="${escapeHTML(subURL)}"
+                   target="_blank"
+                   rel="noopener noreferrer">ซับไทย</a>`;
+            }
 
-      <section class="section">
-        <h2 class="section-title">🌸 เรื่องย่อ</h2>
-        <p class="synopsis">${escapeHTML(synopsis)}</p>
-      </section>
+            if (!links) {
+              links = '<span style="font-size:12px;color:#927e8d">ยังไม่มีลิงก์รับชม</span>';
+            }
 
-      <section class="section">
-        <h2 class="section-title">🎀 ข้อมูลอนิเมะ</h2>
+            episodeHTML += `
+              <article class="episode">
+                <div class="episode-number">ตอนที่ ${i}</div>
+                <div class="episode-modes">${links}</div>
+              </article>`;
+          }
+        } else {
+          episodeHTML = `
+            <div class="empty-note">
+              ยังไม่มีข้อมูลจำนวนตอนของเรื่องนี้
+            </div>`;
+        }
 
-        <div class="facts">
-          <div class="fact">
-            <span class="fact-label">ชื่อเรื่อง</span>
-            <span class="fact-value">${escapeHTML(title)}</span>
-          </div>
+        content.innerHTML = `
+          <section class="hero">
+            <div class="anime-header">
+              <div class="poster">${posterHTML}</div>
 
-          <div class="fact">
-            <span class="fact-label">ปีที่ฉาย</span>
-            <span class="fact-value">${escapeHTML(year)}</span>
-          </div>
+              <div>
+                <div class="eyebrow">♡ ANIME DETAILS</div>
+                <h1>${escapeHTML(title)}</h1>
+                <div class="original-title">${escapeHTML(originalTitle)}</div>
 
-          <div class="fact">
-            <span class="fact-label">จำนวนตอน</span>
-            <span class="fact-value">${episodes} ตอน</span>
-          </div>
+                <div class="badges">${badges.join("")}</div>
+                <div class="genres">${genreHTML}</div>
 
-          <div class="fact">
-            <span class="fact-label">สถานะ</span>
-            <span class="fact-value">${escapeHTML(status)}</span>
-          </div>
+                <div style="color:#927e8d;font-size:13px">
+                  สตูดิโอ: <strong style="color:#493744">${escapeHTML(studio)}</strong>
+                </div>
+              </div>
+            </div>
+          </section>
 
-          <div class="fact">
-            <span class="fact-label">สตูดิโอ</span>
-            <span class="fact-value">${escapeHTML(studio)}</span>
-          </div>
+          <section class="section">
+            <h2 class="section-title">♡ เรื่องย่อ</h2>
+            <p class="synopsis">${escapeHTML(synopsis)}</p>
+          </section>
 
-          <div class="fact">
-            <span class="fact-label">ภาษา</span>
-            <span class="fact-value">${escapeHTML(languageTags.join(" / ") || "ยังไม่ระบุ")}</span>
-          </div>
-        </div>
-      </section>
+          <section class="section">
+            <h2 class="section-title">✧ ข้อมูลอนิเมะ</h2>
+            <div class="facts">
+              <div class="fact">
+                <div class="fact-label">ชื่อเรื่อง</div>
+                <div class="fact-value">${escapeHTML(title)}</div>
+              </div>
+              <div class="fact">
+                <div class="fact-label">ปีที่ฉาย</div>
+                <div class="fact-value">${escapeHTML(year)}</div>
+              </div>
+              <div class="fact">
+                <div class="fact-label">สถานะ</div>
+                <div class="fact-value">${escapeHTML(status)}</div>
+              </div>
+              <div class="fact">
+                <div class="fact-label">จำนวนตอน</div>
+                <div class="fact-value">${episodes} ตอน</div>
+              </div>
+              <div class="fact">
+                <div class="fact-label">สตูดิโอ</div>
+                <div class="fact-value">${escapeHTML(studio)}</div>
+              </div>
+              <div class="fact">
+                <div class="fact-label">แนวอนิเมะ</div>
+                <div class="fact-value">${genres.length
+                  ? genres.map(escapeHTML).join(", ")
+                  : "ไม่ระบุ"}</div>
+              </div>
+            </div>
+          </section>
 
-      <section class="section" id="episodes">
-        <div class="episode-heading">
-          <h2 class="section-title">🎬 รายชื่อตอน</h2>
-          <span class="episode-count">${episodes} ตอน</span>
-        </div>
+          <section class="section" id="episodes">
+            <h2 class="section-title">▶ รายการตอน</h2>
+            <div class="episode-list">${episodeHTML}</div>
+          </section>
 
-        ${episodes > 0
-          ? `<div class="episode-grid">${episodeCards}</div>`
-          : `<p class="synopsis">ยังไม่มีข้อมูลจำนวนตอนของอนิเมะเรื่องนี้</p>`}
-      </section>
+          <a class="back-link" href="catalog.html">← กลับไปหน้าอนิเมะทั้งหมด</a>
+        `;
+      }
 
-      <p style="text-align:center;margin:25px 0">
-        <a href="catalog.html" style="color:var(--pink-dark);font-weight:800">
-          ← กลับไปคลังอนิเมะทั้งหมด
-        </a>
-      </p>
-    `;
-  }
+      // ดึงข้อมูลจาก data.js
+      const animeList = Array.isArray(window.animeData)
+        ? window.animeData
+        : [];
 
-  
-const animeList = Array.isArray(window.animeData)
-  ? window.animeData
-  : [];
+      const anime = animeList.find(function (item) {
+        return String(item.id ?? "").trim() === animeId;
+      });
 
-const animeId = (
-  new URLSearchParams(window.location.search).get("id") || ""
-).trim();
+      console.log("ID จาก URL:", animeId);
+      console.log("จำนวนอนิเมะ:", animeList.length);
+      console.log("อนิเมะที่พบ:", anime);
 
-console.log("ID จาก URL:", animeId);
-console.log(
-  "ID ที่มีในข้อมูล:",
-  animeList.map(item => item.id)
-);
+      if (!window.animeData || !Array.isArray(window.animeData)) {
+        content.innerHTML = `
+          <div class="not-found">
+            <h1>โหลดข้อมูลอนิเมะไม่สำเร็จ</h1>
+            <p>ตรวจสอบว่าไฟล์ data.js อยู่ในโฟลเดอร์เดียวกับ detail.html</p>
+          </div>`;
+      } else if (!animeId) {
+        showNotFound();
+      } else if (anime) {
+        renderDetail(anime);
+        document.title = anime.title + " | Yume Anime";
+      } else {
+        showNotFound();
+      }
 
-const anime = animeList.find(function (item) {
-  return String(item.id ?? "").trim() === animeId;
-});
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
 
-if (anime) {
-  renderDetail(anime);
-} else {
-  content.innerHTML = `
-    <section class="not-found">
-      <div class="emoji">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
-      <h1>ไม่พบอนิเมะเรื่องนี้ 🌸</h1>
-      <p>ID ที่ได้รับ: ${escapeHTML(animeId || "ไม่มี ID")}</p>
-      <p>ลองตรวจสอบรหัสอนิเมะใน data.js อีกครั้งนะ</p>
-      <a class="primary-btn" href="catalog.html">
-        กลับไปคลังอนิเมะ
-      </a>
-    </section>
-  `;
-}
+      const menuBtn = document.getElementById("menuBtn");
+      const navLinks = document.getElementById("navLinks");
 
-  if (anime) {
-    renderDetail(anime);
-  } else {
-    showNotFound();
-  }
-
-  document.getElementById("currentYear").textContent =
-    new Date().getFullYear();
-
-  const menuBtn = document.getElementById("menuBtn");
-  const navLinks = document.getElementById("navLinks");
-
-  menuBtn.addEventListener("click", function () {
-    const isOpen = navLinks.classList.toggle("open");
-    menuBtn.setAttribute("aria-expanded", String(isOpen));
-  });
-})();
-</script>
-
+      menuBtn.addEventListener("click", function () {
+        const isOpen = navLinks.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+      });
+    })();
+  </script>
 </body>
 </html>
