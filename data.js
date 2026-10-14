@@ -2,6 +2,8 @@ const animeData = [
   {
     id: "frieren",
     title: "คำอธิษฐานในวันที่จากลา Frieren",
+    titleThai: "คำอธิษฐานในวันที่จากลา",
+    titleEnglish: "Frieren: Beyond Journey's End",
     originalTitle: "葬送のフリーレン",
     year: 2023,
     status: "จบแล้ว",
@@ -10,54 +12,33 @@ const animeData = [
     dubbedThai: true,
     subbedThai: true,
     popular: true,
+    latest: true,
+    airing: false,
+    cover: "",
+    synopsis: "เรื่องราวของฟรีเรน เอลฟ์ผู้เดินทางต่อหลังจบการผจญภัยของผู้กล้า",
+    studio: "Madhouse",
+    videos: {}
+  },
+  {
+    id: "dandadan",
+    title: "ดันดาดัน Dandadan",
+    titleThai: "ดันดาดัน",
+    titleEnglish: "DAN DA DAN",
+    originalTitle: "ダンダダン",
+    year: 2024,
+    status: "จบแล้ว",
+    episodes: 12,
+    genres: ["Action", "Comedy", "Supernatural"],
+    dubbedThai: true,
+    subbedThai: true,
+    popular: true,
     latest: false,
     airing: false,
-    cover: "ลิงก์รูปปกเดิมของมึง",
-    synopsis: "เรื่องย่อเดิมของมึง",
-    studio: "ชื่อสตูดิโอเดิม",
-
-    // 👇 เพิ่ม videos ตรงนี้ ก่อนปีกกาปิดของ Frieren
-    videos: {
-      1: {
-        dub: { url: "", type: "mp4" },
-        sub: { url: "", type: "mp4" }
-      },
-      2: {
-        dub: { url: "", type: "mp4" },
-        sub: { url: "", type: "mp4" }
-      }
-    }
-  },
- {
-  id: "dandadan",
-  title: "ดันดาดัน Dandadan",
-  year: 2024,
-  status: "จบแล้ว",
-	episodes: 12,
-  genres: ["Action", "Comedy", "Fantasy"],
-  dubbedThai: true,
-  subbedThai: true,
-  popular: true,
-  latest: false,
-  airing: false,
-  cover: "",
-  synopsis: "ใส่เรื่องย่อของอนิเมะเรื่องนี้ตรงนี้",
-  studio: "ใส่ชื่อสตูดิโอเมื่อมีข้อมูลที่ยืนยันแล้ว",
-
-  videos: {
-    1: {
-      dub: { url: "", type: "mp4" },
-      sub: { url: "", type: "mp4" }
-    },
-    2: {
-      dub: { url: "", type: "mp4" },
-      sub: { url: "", type: "mp4" }
-    }
+    cover: "",
+    synopsis: "เรื่องราวของวัยรุ่นที่เข้าไปพัวพันกับเรื่องเหนือธรรมชาติและมนุษย์ต่างดาว",
+    studio: "Science SARU",
+    videos: {}
   }
-},
-  // อนิเมะเรื่องอื่นของมึงต่อจากตรงนี้
 ];
 
-// ทำให้หน้า HTML อื่นเรียกใช้ฐานข้อมูลเดียวกันได้
-href="detail.html?id=frieren"
 window.animeData = animeData;
