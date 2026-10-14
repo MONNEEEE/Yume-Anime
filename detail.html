@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -594,50 +593,53 @@
         }
 
         let episodeHTML = "";
+let episodeHTML = "";
 
-        if (episodes > 0) {
-          for (let i = 1; i <= episodes; i++) {
-            const episode = videos[i] || {};
-            const dub = episode.dub || {};
-            const sub = episode.sub || {};
+if (episodes > 0) {
+  for (let i = 1; i <= episodes; i++) {
+    const episode = videos[i] || {};
+    const dub = episode.dub || {};
+    const sub = episode.sub || {};
 
-            const dubURL = typeof dub.url === "string" ? dub.url.trim() : "";
-            const subURL = typeof sub.url === "string" ? sub.url.trim() : "";
+    function makeEpisodeLink(lang, source) {
+      const internalURL =
+        "watch.html?anime=" + encodeURIComponent(anime.id) +
+        "&ep=" + i + "&lang=" + lang;
 
-            let links = "";
+      const externalURL =
+        typeof source.externalUrl === "string"
+          ? source.externalUrl.trim()
+          : "";
 
-            if (dubURL) {
-              links += `
-                <a class="watch-link"
-                   href="${escapeHTML(dubURL)}"
-                   target="_blank"
-                   rel="noopener noreferrer">พากย์ไทย</a>`;
-            }
+      const externalButton = /^https?:\/\//i.test(externalURL)
+        ? `<a class="watch-link"
+              href="${escapeHTML(externalURL)}"
+              target="_blank"
+              rel="noopener noreferrer">↗ เว็บภายนอก</a>`
+        : "";
 
-            if (subURL) {
-              links += `
-                <a class="watch-link"
-                   href="${escapeHTML(subURL)}"
-                   target="_blank"
-                   rel="noopener noreferrer">ซับไทย</a>`;
-            }
+      return `
+        <a class="watch-link"
+           href="${internalURL}">▶ ${lang === "dub" ? "พากย์ไทย" : "ซับไทย"}</a>
+        ${externalButton}
+      `;
+    }
 
-            if (!links) {
-              links = '<span style="font-size:12px;color:#927e8d">ยังไม่มีลิงก์รับชม</span>';
-            }
-
-            episodeHTML += `
-              <article class="episode">
-                <div class="episode-number">ตอนที่ ${i}</div>
-                <div class="episode-modes">${links}</div>
-              </article>`;
-          }
-        } else {
-          episodeHTML = `
-            <div class="empty-note">
-              ยังไม่มีข้อมูลจำนวนตอนของเรื่องนี้
-            </div>`;
-        }
+    episodeHTML += `
+      <article class="episode">
+        <div class="episode-number">ตอนที่ ${i}</div>
+        <div class="episode-modes">
+          ${makeEpisodeLink("dub", dub)}
+          ${makeEpisodeLink("sub", sub)}
+        </div>
+      </article>`;
+  }
+} else {
+  episodeHTML = `
+    <div class="empty-note">
+      ยังไม่มีข้อมูลจำนวนตอนของเรื่องนี้
+    </div>`;
+}
 
         content.innerHTML = `
           <section class="hero">
