@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff5fa">
+    <meta name="description" content="Yume Anime — โลกแห่งอนิเมะสำหรับคุณ">
+    <title>Yume Anime ♡ โลกแห่งอนิเมะ</title>
+
+```
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        --pink: #ed8fba;
+        --pink-dark: #cf6397;
+        --pink-light: #fff0f7;
+        --text: #604456;
+        --muted: #a58b9a;
+        --border: #f3dce8;
+        --white: #ffffff;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Kanit', sans-serif;
+        color: var(--text);
+        background: #fffafd;
+        line-height: 1.7;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    button,
+    input {
+        font: inherit;
+    }
+
+    button,
+    a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+        width: min(1180px, 92%);
+        margin: auto;
+    }
+
+    /* HEADER */
+
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255,255,255,.96);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(15px);
+    }
+
+    .header-inner {
+        width: min(1280px, 94%);
+        min-height: 72px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: -.7px;
+    }
+
+    .logo-flower {
+        font-size: 29px;
+    }
+
+    .logo span:last-child span {
+        color: var(--pink-dark);
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .nav a {
+        padding: 9px 12px;
+        border-radius: 10px;
+        color: #826b7b;
+        font-size: 13px;
+        white-space: nowrap;
+        transition: .2s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+        color: var(--pink-dark);
+        background: var(--pink-light);
+    }
+
+    .menu-button {
+        display: none;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 11px;
+        color: var(--pink-dark);
+        background: var(--pink-light);
+        font-size: 20px;
+    }
+
+    /* HERO */
+
+    .hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        min-height: 405px;
+        margin: 27px auto 0;
+        padding: 56px 7%;
+        display: flex;
+        align-items: center;
+        border: 1px solid #f3d2e3;
+        border-radius: 28px;
+        background:
+            radial-gradient(circle at 83% 20%, #fff 0 3%, transparent 3.5%),
+            linear-gradient(120deg, #fff0f7, #ffe0ed 57%, #f4dff5);
+    }
+
+    .hero::before {
+        content: "✿";
+        position: absolute;
+        z-index: -1;
+        top: -85px;
+        right: 5%;
+        color: rgba(255,255,255,.65);
+        font-size: 290px;
+        line-height: 1;
+        transform: rotate(-15deg);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 570px;
+    }
+
+    .hero-label {
+        display: inline-block;
+        padding: 6px 12px;
+        border: 1px solid rgba(219,128,171,.25);
+        border-radius: 30px;
+        color: var(--pink-dark);
+        background: rgba(255,255,255,.58);
+        font-size: 10px;
+        letter-spacing: 1.4px;
+    }
+
+    .hero h1 {
+        margin: 19px 0 13px;
+        font-size: clamp(35px, 5vw, 53px);
+        font-weight: 600;
+        line-height: 1.38;
+        letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+        color: var(--pink-dark);
+    }
+
+    .hero p {
+        margin: 0;
+        color: #8d7282;
+        font-size: 14px;
+        line-height: 2;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 11px;
+        margin-top: 25px;
+    }
+
+    .button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        min-height: 45px;
+        padding: 10px 19px;
+        border-radius: 12px;
+        font-size: 13px;
+        transition: .2s;
+    }
+
+    .button:hover {
+        transform: translateY(-2px);
+    }
+
+    .button-primary {
+        color: white;
+        background: linear-gradient(135deg, #e995bb, #d66c9e);
+        box-shadow: 0 6px 17px rgba(204,100,149,.22);
+    }
+
+    .button-white {
+        color: #96627d;
+        border: 1px solid white;
+        background: rgba(255,255,255,.78);
+    }
+
+    .hero-visual {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        width: 46%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .hero-orb {
+        position: absolute;
+        top: 50%;
+        left: 49%;
+        width: min(310px, 80%);
+        aspect-ratio: 1;
+        border: 1px solid rgba(255,255,255,.8);
+        border-radius: 50%;
+        background:
+            radial-gradient(circle at 40% 35%, #fff 0 5%, transparent 5.5%),
+            radial-gradient(circle at 50% 50%, #fff7fb, #f9cfe3 70%);
+        box-shadow: 0 20px 60px rgba(207,99,151,.15);
+        transform: translate(-50%,-50%);
+    }
+
+    .hero-orb::before,
+    .hero-orb::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(255,255,255,.85);
+        border-radius: 50%;
+    }
+
+    .hero-orb::after {
+        inset: 40px;
+    }
+
+    .decoration {
+        position: absolute;
+        font-size: 39px;
+    }
+
+    .decoration-one {
+        top: 14%;
+        left: 18%;
+    }
+
+    .decoration-two {
+        right: 13%;
+        bottom: 17%;
+        font-size: 49px;
+    }
+
+    .decoration-three {
+        top: 18%;
+        right: 14%;
+        color: white;
+        font-size: 40px;
+    }
+
+    .decoration-four {
+        left: 12%;
+        bottom: 19%;
+        color: white;
+    }
+
+    .hero-signature {
+        position: absolute;
+        right: 8%;
+        bottom: 9%;
+        padding: 11px 16px;
+        border: 1px solid white;
+        border-radius: 13px;
+        background: rgba(255,255,255,.75);
+        color: #a16a88;
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        backdrop-filter: blur(8px);
+    }
+
+    /* SEARCH */
+
+    .search-area {
+        width: min(760px, 92%);
+        margin: 34px auto 48px;
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 7px 8px 7px 17px;
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        background: white;
+        box-shadow: 0 8px 28px rgba(203,112,157,.08);
+    }
+
+    .search-icon {
+        color: var(--pink-dark);
+        font-size: 27px;
+    }
+
+    .search-box input {
+        flex: 1;
+        width: 100%;
+        min-width: 0;
+        padding: 10px 0;
+        border: 0;
+        outline: 0;
+        color: var(--text);
+        background: transparent;
+        font-size: 13px;
+    }
+
+    .search-box input::placeholder {
+        color: #b4a0ad;
+    }
+
+    .search-box button {
+        padding: 10px 17px;
+        border: 0;
+        border-radius: 10px;
+        color: white;
+        background: var(--pink-dark);
+        font-size: 12px;
+    }
+
+    .search-note {
+        margin: 9px 0 0 8px;
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    /* SHORTCUTS */
+
+    .shortcuts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 65px;
+    }
+
+    .shortcut {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        transition: .2s;
+    }
+
+    .shortcut:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(203,112,157,.09);
+    }
+
+    .shortcut:nth-child(1) {
+        background: #fff0f7;
+    }
+
+    .shortcut:nth-child(2) {
+        background: #fff3ed;
+    }
+
+    .shortcut:nth-child(3) {
+        background: #f4f0ff;
+    }
+
+    .shortcut-icon {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        border-radius: 13px;
+        background: rgba(255,255,255,.8);
+        font-size: 22px;
+    }
+
+    .shortcut-text {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .shortcut strong,
+    .shortcut small {
+        display: block;
+    }
+
+    .shortcut strong {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .shortcut small {
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    .shortcut-arrow {
+        color: var(--pink-dark);
+        font-size: 19px;
+    }
+
+    /* SECTION */
+
+    .section {
+        margin-bottom: 66px;
+    }
+
+    .section-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 23px;
+    }
+
+    .section-kicker {
+        color: var(--pink-dark);
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 1.7px;
+    }
+
+    .section-heading h2 {
+        margin: 5px 0 3px;
+        font-size: 23px;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    .section-heading p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+    }
+
+    .view-all {
+        flex-shrink: 0;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        color: var(--pink-dark);
+        background: white;
+        font-size: 11px;
+    }
+
+    .view-all:hover {
+        background: var(--pink-light);
+    }
+
+    /* ANIME CARDS */
+
+    .anime-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0,1fr));
+        gap: 17px;
+    }
+
+    .anime-card {
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        background: white;
+        box-shadow: 0 4px 16px rgba(203,112,157,.045);
+        transition: transform .2s, box-shadow .2s;
+    }
+
+    .anime-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 27px rgba(203,112,157,.14);
+    }
+
+    .anime-cover {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 3 / 4;
+        background: linear-gradient(145deg,#fff0f7,#f0e7ff);
+    }
+
+    .anime-cover img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .3s;
+    }
+
+    .anime-card:hover .anime-cover img {
+        transform: scale(1.04);
+    }
+
+    .cover-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        height: 100%;
+        color: #d48bb0;
+        background:
+            radial-gradient(circle at center, white, transparent 45%),
+            linear-gradient(145deg,#fff0f7,#f0e7ff);
+    }
+
+    .cover-placeholder span:first-child {
+        font-size: 39px;
+    }
+
+    .cover-placeholder span:last-child {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        max-width: calc(100% - 16px);
+        overflow: hidden;
+        padding: 3px 8px;
+        border: 1px solid rgba(255,255,255,.8);
+        border-radius: 7px;
+        color: var(--pink-dark);
+        background: rgba(255,255,255,.94);
+        font-size: 9px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .anime-info {
+        padding: 11px;
+    }
+
+    
+.anime-card h3,
+.card-info h3 {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  display: block;
+  overflow: visible;
+  height: auto;
+  min-height: 0;
+  line-height: 1.7;
+}
+
+    .anime-meta {
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    .empty-message {
+        grid-column: 1 / -1;
+        padding: 25px;
+        border: 1px dashed var(--border);
+        border-radius: 14px;
+        color: var(--muted);
+        background: white;
+        text-align: center;
+    }
+
+    /* AIRING */
+
+    .airing-section {
+        padding: 48px 0 1px;
+        margin-bottom: 65px;
+        border-top: 1px solid #f7e4ed;
+        border-bottom: 1px solid #f7e4ed;
+        background: linear-gradient(180deg,#fff5fa,#fffafd);
+    }
+
+    /* GENRES */
+
+    .genre-grid {
+        display: grid;
+        grid-template-columns: repeat(6,minmax(0,1fr));
+        gap: 13px;
+    }
+
+    .genre-card {
+        min-height: 135px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        border: 1px solid transparent;
+        border-radius: 16px;
+        transition: .2s;
+    }
+
+    .genre-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 22px rgba(203,112,157,.08);
+    }
+
+    .genre-icon {
+        margin-bottom: 4px;
+        font-size: 31px;
+    }
+
+    .genre-name {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .genre-en {
+        font-size: 8px;
+        letter-spacing: 1.2px;
+        opacity: .7;
+    }
+
+    .g1 { color:#b76c94; background:#fff0f7; border-color:#f7dce9; }
+    .g2 { color:#c16c91; background:#fff0f0; border-color:#f8dede; }
+    .g3 { color:#8f7bb9; background:#f3efff; border-color:#e5ddfb; }
+    .g4 { color:#b18a56; background:#fff6e8; border-color:#f8e8c9; }
+    .g5 { color:#7186bb; background:#eef4ff; border-color:#dce8fa; }
+    .g6 { color:#6c9985; background:#edf9f2; border-color:#d9eee2; }
+
+    /* CLOSING */
+
+    .closing {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 30px;
+        margin-bottom: 65px;
+        border: 1px solid var(--border);
+        border-radius: 19px;
+        background: linear-gradient(110deg,#fff0f7,#f4eaff);
+    }
+
+    .closing h2 {
+        margin: 6px 0;
+        font-size: 20px;
+    }
+
+    .closing p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+    }
+
+    /* FOOTER */
+
+    .footer {
+        padding: 37px 4% 0;
+        border-top: 1px solid var(--border);
+        background: #fff2f8;
+    }
+
+    .footer-inner {
+        width: min(1180px,100%);
+        margin: auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 35px;
+        padding-bottom: 30px;
+    }
+
+    .footer-description {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 2;
+    }
+
+    .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 9px;
+    }
+
+    .footer-column h3 {
+        margin: 0 0 5px;
+        font-size: 13px;
+    }
+
+    .footer-column a {
+        color: #987f8e;
+        font-size: 12px;
+    }
+
+    .footer-column a:hover {
+        color: var(--pink-dark);
+    }
+
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 15px 0;
+        border-top: 1px solid #f0dce6;
+        color: #aa92a1;
+        font-size: 10px;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 1000px) {
+        .nav {
+            gap: 1px;
+        }
+
+        .nav a {
+            padding: 8px;
+            font-size: 11px;
+        }
+
+        .anime-grid {
+            grid-template-columns: repeat(4,minmax(0,1fr));
+        }
+
+        .genre-grid {
+            grid-template-columns: repeat(3,minmax(0,1fr));
+        }
+    }
+
+    /* IPHONE */
+
+    @media (max-width: 700px) {
+        .header-inner {
+            width: 92%;
+            min-height: 65px;
+            flex-wrap: wrap;
+            gap: 0;
+            padding: 10px 0;
+        }
+
+        .logo {
+            font-size: 21px;
+        }
+
+        .logo-flower {
+            font-size: 25px;
+        }
+
+        .menu-button {
+            display: block;
+        }
+
+        .nav {
+            display: none;
+            flex-basis: 100%;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 3px;
+            padding: 12px 0 3px;
+        }
+
+        .nav.open {
+            display: flex;
+        }
+
+        .nav a {
+            padding: 11px 13px;
+            font-size: 13px;
+        }
+
+        .hero {
+            min-height: 380px;
+            padding: 33px 22px;
+            margin-top: 17px;
+            border-radius: 22px;
+            align-items: flex-start;
+        }
+
+        .hero h1 {
+            font-size: clamp(29px,7.5vw,39px);
+        }
+
+        .hero p {
+            max-width: 260px;
+            font-size: 12px;
+        }
+
+        .hero-visual {
+            width: 100%;
+            opacity: .38;
+        }
+
+        .hero-orb {
+            top: 73%;
+            left: 83%;
+            width: 210px;
+        }
+
+        .decoration-one {
+            top: auto;
+            bottom: 13%;
+            left: 51%;
+            font-size: 29px;
+        }
+
+        .decoration-two {
+            right: 5%;
+            bottom: 8%;
+            font-size: 35px;
+        }
+
+        .decoration-three {
+            top: 54%;
+            right: 7%;
+            font-size: 28px;
+        }
+
+        .decoration-four,
+        .hero-signature {
+            display: none;
+        }
+
+        .hero-buttons {
+            gap: 9px;
+        }
+
+        .button {
+            min-height: 42px;
+            padding: 10px 12px;
+            font-size: 11px;
+        }
+
+        .search-area {
+            margin: 25px auto 35px;
+        }
+
+        .search-box {
+            gap: 8px;
+            padding-left: 11px;
+        }
+
+        .search-box input {
+            font-size: 11px;
+        }
+
+        .search-box button {
+            padding: 10px 11px;
+            font-size: 11px;
+        }
+
+        .shortcuts {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 47px;
+        }
+
+        .shortcut {
+            padding: 12px 14px;
+        }
+
+        .shortcut-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .section {
+            margin-bottom: 49px;
+        }
+
+        .section-heading {
+            align-items: flex-end;
+            gap: 8px;
+            margin-bottom: 17px;
+        }
+
+        .section-heading h2 {
+            font-size: 18px;
+        }
+
+        .section-heading p {
+            font-size: 10px;
+        }
+
+        .section-kicker {
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+
+        .view-all {
+            padding: 7px 9px;
+            font-size: 10px;
+        }
+
+        .anime-grid {
+            grid-template-columns: repeat(2,minmax(0,1fr));
+            gap: 12px;
+        }
+
+        .anime-info {
+            padding: 9px;
+        }
+
+        .anime-title {
+            min-height: 40px;
+            font-size: 12px;
+        }
+
+        .anime-meta {
+            font-size: 9px;
+        }
+
+        .airing-section {
+            padding-top: 33px;
+            margin-bottom: 49px;
+        }
+
+        .genre-grid {
+            grid-template-columns: repeat(2,minmax(0,1fr));
+            gap: 10px;
+        }
+
+        .genre-card {
+            min-height: 115px;
+        }
+
+        .genre-icon {
+            font-size: 28px;
+        }
+
+        .closing {
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 23px 19px;
+            margin-bottom: 45px;
+        }
+
+        .closing h2 {
+            font-size: 17px;
+        }
+
+        .closing p {
+            font-size: 11px;
+        }
+
+        .footer-inner {
+            grid-template-columns: 1fr 1fr;
+            gap: 25px 15px;
+        }
+
+        .footer-about {
+            grid-column: 1 / -1;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            gap: 3px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .hero {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .hero h1 {
+            font-size: 28px;
+        }
+
+        .hero-buttons {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .anime-grid {
+            gap: 9px;
+        }
+
+        .section-heading h2 {
+            font-size: 16px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- เมนูหลัก -->
+<header class="header">
+    <div class="header-inner">
+
+        <a class="logo" href="index.html" aria-label="Yume Anime หน้าหลัก">
+            <span class="logo-flower">🌸</span>
+            <span>Yume<span>Anime</span></span>
+        </a>
+
+        <button class="menu-button"
+                id="menuButton"
+                aria-label="เปิดเมนู"
+                aria-expanded="false"
+                aria-controls="mainNav">
+            ☰
+        </button>
+
+        <nav class="nav" id="mainNav">
+            <a class="active" href="index.html">หน้าหลัก</a>
+            <a href="catalog.html">อนิเมะทั้งหมด</a>
+            <a href="dubbed.html">พากย์ไทย</a>
+            <a href="subbed.html">ซับไทย</a>
+            <a href="search.html">ค้นหา</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <!-- แบนเนอร์ -->
+    <section class="hero container">
+
+        <div class="hero-content">
+            <span class="hero-label">♡ WELCOME TO YUME ANIME ♡</span>
+
+            <h1>
+                โลกแห่งอนิเมะ<br>
+                <span>ที่เต็มไปด้วยความฝัน</span>
+            </h1>
+
+            <p>
+                ค้นพบเรื่องราวใหม่ ๆ ที่คุณอาจตกหลุมรัก<br>
+                แล้วออกเดินทางไปในโลกของอนิเมะด้วยกัน
+            </p>
+
+            <div class="hero-buttons">
+                <a href="catalog.html" class="button button-primary">
+                    ✿ สำรวจอนิเมะ
+                </a>
+
+                <a href="search.html" class="button button-white">
+                    ค้นหาเรื่องโปรด ↗
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+            <div class="hero-orb"></div>
+            <span class="decoration decoration-one">🌸</span>
+            <span class="decoration decoration-two">✿</span>
+            <span class="decoration decoration-three">✧</span>
+            <span class="decoration decoration-four">♡</span>
+            <div class="hero-signature">YUME NO SEKAI · 夢の世界</div>
+        </div>
+
+    </section>
+
+    <!-- ค้นหา -->
+    <section class="search-area">
+        <form class="search-box" id="searchForm">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="ค้นหาชื่ออนิเมะ..."
+                aria-label="ค้นหาชื่ออนิเมะ"
+            >
+
+            <button type="submit">ค้นหา →</button>
+        </form>
+
+        <p class="search-note">♡ ค้นหาด้วยชื่อไทย ชื่อญี่ปุ่น หรือชื่ออังกฤษ</p>
+    </section>
+
+    <!-- เมนูลัด -->
+    <section class="shortcuts container">
+
+        <a class="shortcut" href="catalog.html">
+            <span class="shortcut-icon">📚</span>
+            <span class="shortcut-text">
+                <strong>อนิเมะทั้งหมด</strong>
+                <small>Anime Collection</small>
+            </span>
+            <span class="shortcut-arrow">↗</span>
+        </a>
+
+        <a class="shortcut" href="dubbed.html">
+            <span class="shortcut-icon">🎙️</span>
+            <span class="shortcut-text">
+                <strong>อนิเมะพากย์ไทย</strong>
+                <small>Thai Dub</small>
+            </span>
+            <span class="shortcut-arrow">↗</span>
+        </a>
+
+        <a class="shortcut" href="subbed.html">
+            <span class="shortcut-icon">💬</span>
+            <span class="shortcut-text">
+                <strong>อนิเมะซับไทย</strong>
+                <small>Thai Sub</small>
+            </span>
+            <span class="shortcut-arrow">↗</span>
+        </a>
+
+    </section>
+
+    <!-- ยอดนิยม -->
+    <section class="section container">
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">YOUR NEXT FAVORITE</span>
+                <h2>♡ อนิเมะยอดนิยม</h2>
+                <p>เรื่องราวที่เราอยากให้คุณได้ค้นพบ</p>
+            </div>
+
+            <a href="catalog.html" class="view-all">ดูทั้งหมด →</a>
+        </div>
+
+        <div class="anime-grid" id="popularAnime">
+            <div class="empty-message">เตรียมพื้นที่สำหรับอนิเมะ 🌸</div>
+        </div>
+    </section>
+
+    <!-- ล่าสุด -->
+    <section class="section container">
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">LATEST COLLECTION</span>
+                <h2>✧ อนิเมะล่าสุด</h2>
+                <p>ติดตามข้อมูลอนิเมะที่เพิ่มเข้ามาใหม่</p>
+            </div>
+
+            <a href="catalog.html?sort=latest" class="view-all">ดูทั้งหมด →</a>
+        </div>
+
+        <div class="anime-grid" id="latestAnime">
+            <div class="empty-message">เตรียมพื้นที่สำหรับอนิเมะ 🌸</div>
+        </div>
+    </section>
+
+    <!-- กำลังฉาย -->
+    <section class="airing-section">
+        <div class="container">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">NOW ON AIR</span>
+                    <h2>🌷 อนิเมะที่กำลังฉาย</h2>
+                    <p>เรื่องที่มีสถานะกำลังฉายในข้อมูลเว็บไซต์</p>
+                </div>
+
+                <a href="catalog.html?status=airing" class="view-all">ดูทั้งหมด →</a>
+            </div>
+
+            <div class="anime-grid" id="airingAnime">
+                <div class="empty-message">เตรียมพื้นที่สำหรับอนิเมะ 🌸</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- หมวดหมู่ -->
+    <section class="section container">
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">FIND YOUR STORY</span>
+                <h2>🎀 เลือกหมวดหมู่</h2>
+                <p>เลือกแนวที่ใช่ แล้วไปค้นพบเรื่องใหม่ ๆ</p>
+            </div>
+
+            <a href="category.html" class="view-all">ทั้งหมด →</a>
+        </div>
+
+        <div class="genre-grid">
+            <a href="category.html?genre=Action" class="genre-card g1">
+                <span class="genre-icon">⚔️</span>
+                <span class="genre-name">แอ็กชัน</span>
+                <span class="genre-en">ACTION</span>
+            </a>
+
+            <a href="category.html?genre=Romance" class="genre-card g2">
+                <span class="genre-icon">♡</span>
+                <span class="genre-name">โรแมนติก</span>
+                <span class="genre-en">ROMANCE</span>
+            </a>
+
+            <a href="category.html?genre=Fantasy" class="genre-card g3">
+                <span class="genre-icon">✨</span>
+                <span class="genre-name">แฟนตาซี</span>
+                <span class="genre-en">FANTASY</span>
+            </a>
+
+            <a href="category.html?genre=Comedy" class="genre-card g4">
+                <span class="genre-icon">☁️</span>
+                <span class="genre-name">คอมเมดี้</span>
+                <span class="genre-en">COMEDY</span>
+            </a>
+
+            <a href="category.html?genre=Isekai" class="genre-card g5">
+                <span class="genre-icon">🌙</span>
+                <span class="genre-name">ต่างโลก</span>
+                <span class="genre-en">ISEKAI</span>
+            </a>
+
+            <a href="category.html?genre=Slice%20of%20Life" class="genre-card g6">
+                <span class="genre-icon">☕</span>
+                <span class="genre-name">ชีวิตประจำวัน</span>
+                <span class="genre-en">SLICE OF LIFE</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- แบนเนอร์ท้าย -->
+    <section class="closing container">
+        <div>
+            <span class="section-kicker">A LITTLE DREAM FOR YOU</span>
+            <h2>วันนี้อยากไปผจญภัยในโลกไหน? ♡</h2>
+            <p>เริ่มต้นค้นหาอนิเมะเรื่องโปรดของคุณได้เลย</p>
+        </div>
+
+        <a href="catalog.html" class="button button-primary">
+            ค้นพบอนิเมะ →
+        </a>
+    </section>
+
+</main>
+
+<!-- ท้ายเว็บไซต์ -->
+<footer class="footer">
+    <div class="footer-inner">
+
+        <div class="footer-about">
+            <a class="logo" href="index.html">
+                <span class="logo-flower">🌸</span>
+                <span>Yume<span>Anime</span></span>
+            </a>
+
+            <p class="footer-description">
+                โลกเล็ก ๆ สำหรับคนรักอนิเมะ<br>
+                小さな夢、大きな物語。<br>
+                ความฝันเล็ก ๆ กับเรื่องราวที่ยิ่งใหญ่
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3>เมนูเว็บไซต์</h3>
+            <a href="index.html">หน้าหลัก</a>
+            <a href="catalog.html">อนิเมะทั้งหมด</a>
+            <a href="category.html">หมวดหมู่</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>ค้นหาอนิเมะ</h3>
+            <a href="dubbed.html">พากย์ไทย</a>
+            <a href="subbed.html">ซับไทย</a>
+            <a href="search.html">ค้นหาเรื่องโปรด</a>
+						<script src="js/data.js"></script>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom container">
+        <span>© 2026 Yume Anime</span>
+        <span>Made with ♡ for anime lovers</span>
+    </div>
+</footer>
+
+<script>
+    // เมนูสำหรับหน้าจอมือถือ
+    const menuButton = document.getElementById("menuButton");
+    const mainNav = document.getElementById("mainNav");
+
+    menuButton.addEventListener("click", () => {
+        const opened = mainNav.classList.toggle("open");
+
+        menuButton.setAttribute("aria-expanded", String(opened));
+        menuButton.textContent = opened ? "✕" : "☰";
+        menuButton.setAttribute(
+            "aria-label",
+            opened ? "ปิดเมนู" : "เปิดเมนู"
+        );
+    });
+
+    // ช่องค้นหา
+    document.getElementById("searchForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const keyword = document.getElementById("searchInput").value.trim();
+
+        window.location.href =
+            "search.html?q=" + encodeURIComponent(keyword);
+    });
+
+    // ใช้ข้อมูลจาก data.js ถ้ามีไฟล์นี้และมีข้อมูล animeData
+    function renderAnimeSection(list, elementId) {
+        const container = document.getElementById(elementId);
+
+        if (!container) return;
+
+        if (!Array.isArray(list) || list.length === 0) {
+            container.innerHTML =
+                '<div class="empty-message">ยังไม่มีข้อมูลอนิเมะในส่วนนี้ ♡</div>';
+            return;
+        }
+
+        container.innerHTML = list.map(anime => {
+            const title = String(anime.title || "ไม่ระบุชื่อ")
+                .replace(/[&<>"']/g, char => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                })[char]);
+
+            const id = encodeURIComponent(anime.id || "");
+            const cover = String(anime.cover || "").trim();
+
+            const badge = Array.isArray(anime.audio)
+                ? anime.audio.join(" / ")
+                : "อนิเมะ";
+
+            const safeBadge = badge.replace(/[&<>"']/g, char => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[char]);
+
+            const coverHTML = cover
+                ? `<img src="${cover.replace(/"/g, "&quot;")}"
+                        alt="${title}"
+                        loading="lazy"
+                        onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+                   <div class="cover-placeholder" hidden>
+                       <span>🌸</span><span>YUME ANIME</span>
+                   </div>`
+                : `<div class="cover-placeholder">
+                       <span>🌸</span><span>YUME ANIME</span>
+                   </div>`;
+
+            return `
+                <a class="anime-card" href="detail.html?id=${id}">
+                    <div class="anime-cover">
+                        ${coverHTML}
+                        <span class="badge">${safeBadge}</span>
+                    </div>
+                    <div class="anime-info">
+                        <h3 class="anime-title">${title}</h3>
+                        <div class="anime-meta">
+                            ${Number(anime.year) || "ไม่ระบุปี"}
+                            · ${anime.status || "ไม่ระบุสถานะ"}
+                        </div>
+                    </div>
+                </a>
+            `;
+        }).join("");
+    }
+
+    // เมื่อเพิ่มข้อมูลอนิเมะใน data.js แล้ว หน้าแรกจะนำข้อมูลมาแสดง
+    document.addEventListener("DOMContentLoaded", () => {
+        if (typeof animeData === "undefined") return;
+
+        renderAnimeSection(
+            animeData.filter(anime => anime.popular),
+            "popularAnime"
+        );
+
+        renderAnimeSection(
+            animeData.filter(anime => anime.latest),
+            "latestAnime"
+        );
+
+        renderAnimeSection(
+            animeData.filter(anime => anime.airing),
+            "airingAnime"
+        );
+    });
+</script>
+```
+
+</body>
+</html>
